@@ -1,0 +1,8 @@
+{
+    "env": {
+        "DB_USERNAME": "mez",
+        "DB_PASSWORD": "incorrect94",
+        "DB_NAME": "shop",
+        "PORT": 3000
+    }
+}
