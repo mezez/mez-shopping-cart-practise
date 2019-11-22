@@ -1,16 +1,17 @@
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
+const keys = require('../config/keys');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto'); //a built in node js module for creating random unique values
 const { validationResult } = require('express-validator');
 
-const myEmail = 'mez.test.email@gmail.com';
+const myEmail = keys.EMAIL;
 
 let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'mez.test.email@gmail.com',
-    pass: 'meztestemail1'
+    user: keys.email,
+    pass: keys.password
   },
   tls: {
     rejectUnauthorized: false

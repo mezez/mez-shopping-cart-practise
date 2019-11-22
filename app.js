@@ -16,10 +16,12 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
+const keys = require('./config/keys');
 
 const app = express();
 
-const MONGODB_URI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@learn-zuf6u.mongodb.net/${process.env.DB_NAME}`;
+const MONGODB_URI = `mongodb+srv://${keys.DB_USERNAME}:${keys.DB_PASSWORD}@learn-zuf6u.mongodb.net/${keys.DB_NAME}`;
+const MONGODB_URI_TEST = "mongodb://localhost/learn";
 const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: 'sessions'
@@ -115,12 +117,13 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    MONGODB_URI, { useNewUrlParser: true }
+    MONGODB_URI_TEST, { useNewUrlParser: true }
+    //MONGODB_URI, { useNewUrlParser: true }
   )
   .then(result => {
-    app.listen(process.env.PORT || 3000); //starts server using default http
+    app.listen(keys.PORT || 3000); //starts server using default http
     //https.createServer({key: privateKey, cert: certificate}, app)
-    //.listen(process.env.PORT || 3000); //starts server using ssl encryption
+    //.listen(keys.PORT || 3000); //starts server using ssl encryption
   })
   .catch(err => {
     console.log(err);
